@@ -12,7 +12,7 @@
      privacypolicy_url: false
      donation_url: false
      contact_url: false
-     enable_metrics: true
+     enable_metrics: false
 
 ``debug`` : ``$SEARXNG_DEBUG``
   Allow a more detailed log if you run SearXNG directly. Display *detailed* error

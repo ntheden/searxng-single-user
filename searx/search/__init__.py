@@ -28,7 +28,7 @@ from searx.search.checker import initialize as initialize_checker
 logger = logger.getChild('search')
 
 
-def initialize(settings_engines=None, enable_checker=False, check_network=False, enable_metrics=True):
+def initialize(settings_engines=None, enable_checker=False, check_network=False, enable_metrics=False):
     settings_engines = settings_engines or settings['engines']
     load_engines(settings_engines)
     initialize_network(settings_engines, settings['outgoing'])

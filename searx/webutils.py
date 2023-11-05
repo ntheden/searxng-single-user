@@ -154,11 +154,19 @@ class JSONEncoder(json.JSONEncoder):
         return super().default(o)
 
 
+def timestamp():
+    now = datetime.now()
+    microseconds = int(round(now.microsecond / 1000)) # Convert to milliseconds and truncate to integer
+    formatted_timestamp = f"[{now:%Y-%m-%d %H:%M:%S}.{microseconds}]" # Format as HH:MM:SS.mmm
+    return formatted_timestamp
+
+
 def get_json_response(sq: SearchQuery, rc: ResultContainer) -> str:
     """Returns the JSON string of the results to a query (``application/json``)"""
     results = rc.number_of_results
     x = {
         'query': sq.query,
+        'timestamp': timestamp(),
         'number_of_results': results,
         'results': rc.get_ordered_results(),
         'answers': list(rc.answers),

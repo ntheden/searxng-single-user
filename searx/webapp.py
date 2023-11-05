@@ -59,6 +59,7 @@ from searx import (
 from searx import infopage
 from searx import limiter
 from searx.botdetection import link_token
+from searx.history import write_to_history
 
 from searx.data import ENGINE_DESCRIPTIONS
 from searx.results import Timing
@@ -677,10 +678,11 @@ def search():
 
     # 3. formats without a template
 
+    json_response = webutils.get_json_response(search_query, result_container)
+    write_to_history(json_response)
     if output_format == 'json':
 
-        response = webutils.get_json_response(search_query, result_container)
-        return Response(response, mimetype='application/json')
+        return Response(json_response, mimetype='application/json')
 
     if output_format == 'csv':
 
